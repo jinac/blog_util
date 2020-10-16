@@ -8,7 +8,7 @@ import glob
 import os
 
 import imageio
-import pygisicle as pgif
+from pygifsicle import optimize
 
 def main():
     parser = argparse.ArgumentParser(
@@ -34,11 +34,11 @@ def main():
 
     if args.vid:
         with imageio.get_writer(out) as writer:
-            with imageio.get_reader(args.vid):
+            with imageio.get_reader(args.vid) as reader:
                 for idx, img in enumerate(reader):
                     writer.append_data(img)
 
-    pgif.optimize(out)
+    optimize(out)
 
 
 if __name__ == '__main__':
